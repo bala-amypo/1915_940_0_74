@@ -6,19 +6,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-// import jakarta.persistence.Table;
+import jakarta.persistence.Table;
 @Entity
-// @Table(name="StudentTable")
+@Table(name="StudentTable")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private String name;
     private String email;
-    public int getId() {
+    public long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
     public String getName() {
@@ -35,7 +35,7 @@ public class Student {
     }
    
     
-    public Student(int id, String name, String email, LocalDate dob, float cgpa) {
+    public Student(long id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
