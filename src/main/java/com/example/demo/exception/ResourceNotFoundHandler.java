@@ -5,3 +5,4 @@ public class ResourceNotFoundHandler extends RuntimeException{
     public ResourceNotFoundHandler (String message){
         super(message);
     }
+}
