@@ -1,33 +1,34 @@
 package com.example.demo.exception;
+
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.Map;
 import java.util.HashMap;
 
-
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-
 @RestControllerAdvice
-public class GlobalExceptionHandler{
+public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ResourceNotFoundHandler.class) //runtime expection
-        public ResponseEntity<String> handleNotFound(ResourceNotFoundHandler ex){
-            return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_FOUND);
-        }
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<String> handleNotFound(ResourceNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String,String>> handleMethod(MethodArgumentNotValidException mex){
-        
-        Map<String,String> errors=new HashMap<>();
+    public ResponseEntity<Map<String, String>> handleMethod(
+            MethodArgumentNotValidException ex) {
 
-        mex.getBindingResult().getFieldErrors().forEach(error ->
-                errors.put(error.getField(), error.getDefaultMessage())
-        );
+    Map<String, String> errors = new HashMap<>();
 
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
-    }
+    ex.getBindingResult().getFieldErrors().forEach(fieldError ->
+            errors.put(fieldError.getField(),
+                       fieldError.getDefaultMessage())
+    );
+
+    return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+}
 
 }

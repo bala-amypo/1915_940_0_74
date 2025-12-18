@@ -1,8 +1,9 @@
 package com.example.demo.exception;
 
-public class ResourceNotFoundHandler extends RuntimeException{
 
-    public ResourceNotFoundHandler (String message){
+
+public class ResourceNotFoundException extends RuntimeException{
+    public ResourceNotFoundException(String message){
         super(message);
     }
     
