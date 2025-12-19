@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.Map;
 import java.util.HashMap;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MethodArgumentNotValidHandler;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler{
@@ -16,8 +16,8 @@ public class GlobalExceptionHandler{
             return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_FOUND);
         }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String,String>> handleMethod(MethodArgumentNotValidException mex){
+    @ExceptionHandler(MethodArgumentNotValidHandler.class)
+    public ResponseEntity<Map<String,String>> handleMethod(MethodArgumentNotValidHandler mex){
         
         Map<String,String> errors=new HashMap<>();
 
