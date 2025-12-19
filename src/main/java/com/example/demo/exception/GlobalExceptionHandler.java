@@ -1,3 +1,4 @@
+
 package com.example.demo.exception;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,13 +12,13 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 @RestControllerAdvice
 public class GlobalExceptionHandler{
 
-    @ExceptionHandler(MethodArgumentNotValidHandler.class) //runtime expection
-        public ResponseEntity<String> HandleNotFound(MethodArgumentNotValidHandler ex){
+    @ExceptionHandler(ResourceNotFoundHandler.class) //runtime expection
+        public ResponseEntity<String> handleNotFound(ResourceNotFoundHandler ex){
             return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_FOUND);
         }
 
-    @ExceptionHandler(MethodArgumentNotValidHandler.class)
-    public ResponseEntity<Map<String,String>> handleMethod(MethodArgumentNotValidHandler mex){
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String,String>> handleMethod(MethodArgumentNotValidException mex){
         
         Map<String,String> errors=new HashMap<>();
 
